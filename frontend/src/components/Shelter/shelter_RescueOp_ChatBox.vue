@@ -36,7 +36,7 @@ const selectedConversation = ref({
 });
 
 //socket connections, and routes
-const socket = io('http://localhost:5000');
+const socket = io('https://capstone-furry-safe-vl9o.onrender.com');
 socket.on('connect', () => {
 });
 socket.on('receive-message', (messageData) => {
@@ -53,7 +53,7 @@ socket.on('receive-message', (messageData) => {
 // Fetch all conversations
 const fetchInbox = async () => {
     try {
-        const response = await axios.post("http://localhost:5000/loadinbox", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/loadinbox", {
             id: user_id.value,
             // Optionally, include other parameters if needed
         });
@@ -129,7 +129,7 @@ const selectConversation = async (conversation) => {
 
     try {
         // Fetch messages for the selected chat
-        const response = await axios.post("http://localhost:5000/loadinbox", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/loadinbox", {
             id: user_id.value,
             chat_id: selectedChat_id.value
         });
@@ -180,7 +180,7 @@ async function sendMessage(thisformData) {
 
     // Proceed to send the message
     try {
-        const response = await axios.post("http://localhost:5000/sendmessage", thisformData, {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/sendmessage", thisformData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -242,7 +242,7 @@ async function sendMessage(thisformData) {
 
 const createNewMessage = async () => {
     try {
-        const response = await axios.post("http://localhost:5000/newchat", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/newchat", {
             senderid: user_id.value,
             receiverid: receiverId.value
         });
@@ -266,7 +266,7 @@ const fetchData = async (query) => {
         return;
     }
     try {
-        const response = await axios.post("http://localhost:5000/search", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/search", {
             value: searchValue.value
         });
         searchResults.value = response.data;
@@ -291,7 +291,7 @@ const scrollToBottom = async () => {
 
 const getUserFullName = async () => {
     try {
-        const response = await axios.post("http://localhost:5000/getfullname", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/getfullname", {
             id: user_id.value,
         });
 
@@ -311,7 +311,7 @@ let posts = ref([])
 let _user_id = localStorage.getItem('u_id')
 async function retrieveInPorgressReports() {
     try {
-        const response = await axios.post("http://localhost:5000/getongoingoperations", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/getongoingoperations", {
             _shelter_id: _user_id,
             _status: 'In progress'
         });
@@ -328,7 +328,7 @@ async function retrieveInPorgressReports() {
 let rescuedposts = ref([])
 async function retrieveRescuedReports() {
     try {
-        const response = await axios.post("http://localhost:5000/getongoingoperations", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/getongoingoperations", {
             _shelter_id: _user_id,
             _status: 'Rescued'
         });
@@ -346,7 +346,7 @@ async function retrieveRescuedReports() {
 let pendingposts = ref([])
 async function retrievePendingReports() {
     try {
-        const response = await axios.post("http://localhost:5000/getereports", {
+        const response = await axios.post("https://capstone-furry-safe-vl9o.onrender.com/getereports", {
             _post_id: selectedPost.value,
             _post_type: -1,
             _report_status: 'Pending' // Nov12 'In progress'  change to 'Pending'
